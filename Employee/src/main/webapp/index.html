@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Responsive Employee Registration Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #e0f7fa, #fce4ec);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 500px;
+      transition: all 0.3s ease;
+    }
+
+    .form-container:hover {
+      transform: scale(1.02);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    input[type="submit"] {
+      background-color: #00796b;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #004d40;
+    }
+
+    .info {
+      font-size: 14px;
+      color: green;
+      display: none;
+      margin-top: -10px;
+      margin-bottom: 15px;
+    }
+
+    @media screen and (max-width: 500px) {
+      .form-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Employee Registration</h2>
+  <form action="fs" method="post" onsubmit="return validateForm()">
+    <label for="empname">Employee Name</label>
+    <input type="text" id="empname" name="empname" placeholder="Enter full name" required>
+
+    <label for="empemail">Email</label>
+    <input type="email" id="empemail" name="empemail" placeholder="Enter email address" required>
+
+    <label for="department">Department</label>
+    <select id="department" name="department" required>
+      <option value="">-- Select Department --</option>
+      <option value="HR">HR</option>
+      <option value="Development">Development</option>
+      <option value="Marketing">Marketing</option>
+      <option value="Finance">Finance</option>
+    </select>
+
+    <label for="salary">Salary</label>
+    <input type="number" id="salary" name="salary" placeholder="Enter salary" required>
+
+    <p class="info" id="successMsg">Form is valid and ready to submit!</p>
+
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+<script>
+  function validateForm() {
+    const name = document.getElementById("empname").value.trim();
+    const email = document.getElementById("empemail").value.trim();
+    const department = document.getElementById("department").value;
+    const salary = document.getElementById("salary").value;
+
+    if (!name || !email || !department || !salary) {
+      alert("Please fill out all fields.");
+      return false;
+    }
+
+    // Basic salary validation
+    if (parseFloat(salary) < 5000) {
+      alert("Salary must be at least ₹5000.");
+      return false;
+    }
+
+    // Show confirmation message
+    document.getElementById("successMsg").style.display = "block";
+    return true; // Submit form
+  }
+</script>
+
+</body>
+</html>
